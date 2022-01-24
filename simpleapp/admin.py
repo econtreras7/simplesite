@@ -13,5 +13,5 @@ class BusinessAdmin(admin.ModelAdmin):
     inlines =[
         BusinessInLine
     ]
-
-admin.site.register(Business,BusinessAdmin)
+#errors when i try to register below....
+admin.site.register(Business)
