@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from ctypes import cast
 from pathlib import Path
 from decouple import config
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -77,12 +78,25 @@ WSGI_APPLICATION = 'simpleproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+if not DEBUG:
+    
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+       DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': config('DATABASE_NAME'),
+                'USER': config('DATABASE_USER'),
+                'PASSWORD': config('DATABASE_PASSWORD'),
+                'HOST': config('DATABASE_HOST'),
+                'PORT': config('DATABASE_PORT'),
+            }
+        }
 
 
 # Password validation
